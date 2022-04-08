@@ -1,0 +1,10 @@
+.containerLoadMore{
+    width: 100%;
+}
+
+.loadMore{
+    margin: auto;
+    display: block;
+    width: 170px;
+    cursor:pointer;
+}
