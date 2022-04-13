@@ -1,1 +1,1 @@
-import ShopInterface from './shop.interface'
+import ShopInterface from './shop.interface';
