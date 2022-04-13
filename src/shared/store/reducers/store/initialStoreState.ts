@@ -1,4 +1,4 @@
-import StoreStateInterface from "../../../interfaces/store/storeState.interface";
+import StoreStateInterface from "../../../interfaces/_state/storeState.interface";
 import { ApiStatusModel } from "../../../models/api";
 
 export const initialStoreState: StoreStateInterface = {

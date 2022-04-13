@@ -1,4 +1,4 @@
-import StoreStateInterface from "../store/storeState.interface";
+import StoreStateInterface from "./storeState.interface";
 
 export interface StateInterface {
     todos: StoreStateInterface;

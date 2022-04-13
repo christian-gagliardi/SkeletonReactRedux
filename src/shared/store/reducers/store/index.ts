@@ -1,6 +1,6 @@
 import { StoreConsts } from "../../constants/store";
 import { ApiStatusModel } from "../../../models/api";
-import StoreStateInterface from "../../../interfaces/store/storeState.interface";
+import StoreStateInterface from "../../../interfaces/_state/storeState.interface";
 import { initialStoreState } from "./initialStoreState";
 
 import produce from "immer";

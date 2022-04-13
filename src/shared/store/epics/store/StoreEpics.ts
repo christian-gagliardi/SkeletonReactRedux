@@ -10,11 +10,12 @@ import StoreInterface from "../../../interfaces/store/store.interface";
 
 
 const getStoreEpic = ( action$:any, state$:any ) =>{
-  console.log('Epic -> getStoreEpic');
+  console.log('EPIC -> INIT GET');
   return action$.pipe(
     filter(isOfType(Consts.StoreConsts.STORE_GET)),
+    tap(()=>console.log('EPIC -> GET')),
     switchMap((action:{ payload: {id: string}}) => {
-      return from(axios.get("http://localhost:3001/api/store/details/" + action.payload.id)).pipe(
+      return from(axios.get("http://localhost:3000/api/store/details/" + action.payload.id)).pipe(
         map((response:any) => StoreActions.setStoreAction(response.data)),
         startWith(StoreActions.storeLoadingAction()),
         catchError(() => of(StoreActions.storeFailed()))
@@ -24,9 +25,10 @@ const getStoreEpic = ( action$:any, state$:any ) =>{
 };
 
 const setStoreEpic = ( action$:any, state$:any ) =>{
-  console.log('Epic -> setStoreEpic');
+  console.log('EPIC -> INIT SET');
   
   return action$.pipe(
+    tap(()=>console.log('EPIC -> SET')),
     filter(isOfType(Consts.StoreConsts.STORE_SET)),
     map((action:{ payload: {store: StoreInterface}}) => state$.store = action.payload.store),
     map(()=>StoreActions.storeLoadedAction()),
