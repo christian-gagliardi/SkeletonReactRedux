@@ -22,7 +22,14 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "__start": "sh -ac '. .env.${REACT_APP_ENV}; yarn start'",
+    "start:staging": "REACT_APP_ENV=staging yarn __start",
+    "start:development": "REACT_APP_ENV=development yarn __start",
+    "start:production": "REACT_APP_ENV=production yarn __start",
+    "__build": "sh -ac '. .env.${REACT_APP_ENV}; react-scripts build'",
+    "build:staging": "REACT_APP_ENV=staging yarn __build",
+    "build:development": "REACT_APP_ENV=development yarn __build",
+    "build:production": "REACT_APP_ENV=production yarn __build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
