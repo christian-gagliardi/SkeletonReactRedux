@@ -1,5 +1,3 @@
-import * as StoreActions from './stores';
+import * as ShopActions from './shop'
 
-export {
-  StoreActions
-}
+export { ShopActions }
