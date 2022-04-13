@@ -29,7 +29,7 @@ function HomeComponent() {
         
         if(!store){
             console.log('dispatch---------------------------------- start');            
-            dispatch(ShopActions.getAllShopsAction(0, 10))
+            dispatch(ShopActions.getShopAction('5f5a4fa151853f001886a5c5'));
             console.log('end dispatch');
         }
     }, [store])

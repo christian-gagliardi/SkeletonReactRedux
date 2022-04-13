@@ -4,7 +4,6 @@ import StoreStateInterface from '../../../interfaces/_state/storeState.interface
 import { initialStoreState } from '../../initialStoreState'
 
 import produce from 'immer'
-import { act } from 'react-dom/test-utils'
 
 export default function shopReducer(
     state: StoreStateInterface = initialStoreState,
