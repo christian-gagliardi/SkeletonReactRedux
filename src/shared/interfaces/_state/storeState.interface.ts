@@ -1,7 +1,8 @@
-import StoreInterface from "../store/store.interface";
-import { ApiStatusModel } from "../../models/api";
+import ShopInterface from '../shop/shop.interface'
+import { ApiStatusModel } from '../api'
 
 export default interface StoreStateInterface {
-    loadingStatus: ApiStatusModel;
-    store: StoreInterface|null;
+    loadingStatus: ApiStatusModel
+    shop: ShopInterface | null
+    shops: ShopInterface[] | null
 }

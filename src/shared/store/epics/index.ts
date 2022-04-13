@@ -1,5 +1,5 @@
 import { combineEpics, createEpicMiddleware } from 'redux-observable';
-import storeEpic from './store/StoreEpics';
+import storeEpic from './shop/ShopEpics';
 
 export const rootEpic = combineEpics(storeEpic);
 

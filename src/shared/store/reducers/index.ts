@@ -1,15 +1,13 @@
-import { combineReducers } from 'redux';
-import storeReducer from './store';
-import { initialStoreState } from './store/initialStoreState';
-
-
+import { combineReducers } from 'redux'
+import storeReducer from './shop'
+import { initialStoreState } from '../initialStoreState'
 
 export const initialState = {
-  mainStore: initialStoreState
-};
+    mainStore: initialStoreState,
+}
 
 export const rootReducer = combineReducers({
-  mainStore: storeReducer
-});
+    mainStore: storeReducer,
+})
 
 export type RootState = ReturnType<typeof rootReducer>

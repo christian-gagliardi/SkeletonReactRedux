@@ -11,41 +11,39 @@ import ShowStoreComponent from "../../components/molecules/ShowStores/showStores
 import { pendingConfigObj, successConfigObj, errorConfigObj} from '../../utils/reactToastify/promiseConfig';
 import closeButton from '../../utils/reactToastify/closeButton';
 
-import StoreInterface from "../../shared/interfaces/store/store.interface";
+import StoreInterface from "../../shared/interfaces/shop/shop.interface";
 import { RootState } from "../../shared/store/reducers";
-import { StoreActions } from '../../shared/store/actions/';
+import { ShopActions } from '../../shared/store/actions/';
 
 function HomeComponent() {
     const [loadMoreParams, setLoadMoreParams] = useState(0);
-    const [stores, setStore ] = useState<StoreInterface[]>();
+    const [stores, setStores ] = useState<StoreInterface[]>();
     const [hideLoadMore, setHideLoadMore] = useState(false);
     
     const dispatch = useDispatch();
-    const store = useSelector((state:RootState) => state.mainStore.store);
+    const store = useSelector((state:RootState) => state.mainStore.shop);
 
     useEffect(()=>{
         console.log('USE-EFFECT');
         console.log('log of store in home component: ', store);
         
         if(!store){
-            // console.log('dispatch---------------------------------- start');            
-            // dispatch(StoreActions.getStoreAction("5f5a4fa151853f001886a5c5"))
-            // console.log('end dispatch');
+            console.log('dispatch---------------------------------- start');            
+            dispatch(ShopActions.getAllShopsAction(0, 10))
+            console.log('end dispatch');
         }
     }, [store])
 
-    const x = () =>{
-            console.log('START DISPATCH---------------------------------- start');            
-            dispatch(StoreActions.getStoreAction("5f5a4fa151853f001886a5c5"))
-            console.log('END DISPATCH---------------------------------- end');
-    }
+
+    console.log(stores)
+
 
     const getStoreFromService = async()=>{
         return new Promise(async(resolve, reject)=>{
             try{
                 return await HomeService.fake_getDataFromServer(loadMoreParams, 20).then(async (result) => {
                     if(!result){ setHideLoadMore(true)}
-                    setStore(result);
+                    setStores(result);
                     return resolve(1);
                 }).catch((e)=> {throw new Error(e)});
             }catch(err){
@@ -63,7 +61,6 @@ function HomeComponent() {
     return (
         <div>
             <ToastContainer closeButton={closeButton}></ToastContainer>
-            <button onClick={x}> xxxxxxx </button>
             {(store) ? 
                 <div>
                     <ShowStoreComponent stores={[store]} loadMore={loadMore}></ShowStoreComponent>

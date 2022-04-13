@@ -1,6 +1,6 @@
 import { Navigate } from 'react-router-dom';
 import { useEffect, useState } from "react";
-import StoreInterface from "../../../shared/interfaces/store/store.interface";
+import StoreInterface from "../../../shared/interfaces/shop/shop.interface";
 import UiCardComponent from "../../atoms/UiCard/uiCard.component";
 import './showStore.style.css'
 
