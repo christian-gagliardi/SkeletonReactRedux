@@ -1,6 +1,5 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-yarn run huskyPreCommit
-git add .
+yarn run huskyPreCommit && git add .
 
