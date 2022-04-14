@@ -31,7 +31,12 @@
     "build:development": "REACT_APP_ENV=development yarn __build",
     "build:production": "REACT_APP_ENV=production yarn __build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prepare": "husky install",
+    "huskyPreCommit": "yarn run lint && yarn run lint:fix && yarn run format",
+    "lint": "eslint ",
+    "lint:fix": "eslint --fix",
+    "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc"
   },
   "eslintConfig": {
     "extends": [
@@ -61,6 +66,7 @@
     "@types/react-dom": "^17.0.9",
     "@types/react-redux": "^7.1.23",
     "@types/redux": "^3.6.0",
+    "husky": "^7.0.0",
     "prettier": "^2.6.2"
   }
 }

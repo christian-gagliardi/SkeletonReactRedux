@@ -1,5 +1,5 @@
-import { ShopConsts } from './shop'
+import {ShopConsts} from './shop';
 
 export default {
-    ShopConsts,
-}
+  ShopConsts
+};
