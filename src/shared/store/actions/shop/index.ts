@@ -24,13 +24,13 @@ export function getAllShopsAction(offset: number, limit: number) {
   };
 }
 
-export function setShopAction(store: ShopInterface) {
+export function setShopAction(shop: ShopInterface) {
   console.log('Action -> SHOP_SET');
 
   return {
     type: ShopConsts.SHOP_SET,
     payload: {
-      store
+      shop
     }
   };
 }
@@ -42,17 +42,6 @@ export function setAllShopsAction(shops: ShopInterface[]) {
     type: ShopConsts.SHOP_SET_ALL,
     payload: {
       shops
-    }
-  };
-}
-
-export function updateShopAction(store: ShopInterface) {
-  console.log('Action -> SHOP_UPDATE');
-
-  return {
-    type: ShopConsts.SHOP_UPDATE,
-    payload: {
-      store
     }
   };
 }

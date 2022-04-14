@@ -13,35 +13,14 @@ export default function shopReducer(
     console.log('REDUCERS -> MAIN -> storeReducer');
 
     switch (action.type) {
-      case ShopConsts.SHOP_GET:
-        console.log('REDUCERS -> SHOP_GET');
-        //draft.loadingStatus = ApiStatusModel.LOADING
-        // draft.shop = action.payload.store
-        break;
-
-      case ShopConsts.SHOP_GET_ALL:
-        console.log('REDUCERS -> SHOP_GET_ALL');
-        draft.loadingStatus = ApiStatusModel.LOADING;
-        // draft.shop = action.payload.store
-        break;
-
       case ShopConsts.SHOP_SET:
         console.log('REDUCERS -> SHOP_SET');
-        draft.loadingStatus = ApiStatusModel.LOADING;
-        draft.shop = action.payload.store;
+        draft.shop = action.payload.shop;
         break;
 
       case ShopConsts.SHOP_SET_ALL:
         console.log('REDUCERS -> SHOP_SET_ALL');
-        draft.loadingStatus = ApiStatusModel.LOADING;
-        console.log(action.payload.shops);
         draft.shops = action.payload.shops;
-        break;
-
-      case ShopConsts.SHOP_UPDATE:
-        console.log('REDUCERS -> SHOP_UPDATE');
-        draft.loadingStatus = ApiStatusModel.LOADING;
-        draft.shop = action.payload.store;
         break;
 
       case ShopConsts.SHOP_LOADING:
