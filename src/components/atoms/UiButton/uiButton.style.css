@@ -1,0 +1,26 @@
+.button {
+  padding: 1em;
+  border: 1px solid #2ba3b2;
+  background-color: white;
+  border-radius: 0.5em;
+  cursor: pointer;
+}
+.button:hover {
+  border-color: #1b8c9b;
+  color: #1b8c9b;
+}
+
+.button-primary {
+  background-color: #2ba3b2;
+}
+.button-primary:hover {
+  background-color: #1b8c9b;
+}
+
+.button-text {
+  color: #2ba3b2;
+}
+
+.button-text-primary {
+  color: white;
+}

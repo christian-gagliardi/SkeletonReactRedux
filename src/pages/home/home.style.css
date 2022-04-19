@@ -2,6 +2,13 @@
   width: 100%;
 }
 
+.containerCenter {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .loadMore {
   margin: auto;
   display: block;

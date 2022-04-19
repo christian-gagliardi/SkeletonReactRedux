@@ -8,6 +8,7 @@
   color: #333;
   margin: 10px;
   cursor: pointer;
+  padding: 1.5em;
 
   transition: all 0.2s ease-out;
   border: 1px solid #ddd;
@@ -43,7 +44,7 @@
 
 .card-content h3 {
   margin: 0;
-  padding: 0;
+  padding-bottom: 0.5em;
 }
 
 .imagePointer {

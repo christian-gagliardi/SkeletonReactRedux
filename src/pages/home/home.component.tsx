@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import * as HomeService from '../../shared/services/home.service';
 
 import ShowStoreComponent from '../../components/molecules/ShowStores/showStores.component';
+import UiButtonComponent from '../../components/atoms/UiButton/uiButton.component';
 import {
   pendingConfigObj,
   successConfigObj,
@@ -71,12 +72,17 @@ function HomeComponent() {
 
   const loadMore = async () => setLoadMoreParams((loadMoreParams) => (loadMoreParams += 20));
 
+  const getAllShops = () => {
+    console.log('getStores');
+  };
+
   return (
     <div>
       <ToastContainer closeButton={closeButton}></ToastContainer>
       {store ? (
         <div>
           <ShowStoreComponent stores={[store]} loadMore={loadMore}></ShowStoreComponent>
+
           {hideLoadMore ? null : (
             <h3 className='containerLoadMore'>
               <a className='loadMore' onClick={loadMore}>
@@ -84,6 +90,11 @@ function HomeComponent() {
               </a>
             </h3>
           )}
+          <div className='containerCenter'>
+            <UiButtonComponent
+              content={{text: 'Tutte le farmacie', isPrimary: true, onClick: getAllShops}}
+            />
+          </div>
         </div>
       ) : null}
     </div>

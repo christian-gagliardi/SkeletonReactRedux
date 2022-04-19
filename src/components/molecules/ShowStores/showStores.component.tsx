@@ -3,6 +3,7 @@ import {useEffect, useState} from 'react';
 import StoreInterface from '../../../shared/interfaces/shop/shop.interface';
 import UiCardComponent from '../../atoms/UiCard/uiCard.component';
 import './showStore.style.css';
+import {capitalizeIt} from '../../../utils/functions';
 
 function ShowStoreComponent({stores}: StoreInterface[] | any) {
   const [data, setData] = useState([]);
@@ -14,12 +15,13 @@ function ShowStoreComponent({stores}: StoreInterface[] | any) {
       result.push({
         key: i._id,
         code: i.code,
-        name: i.name.charAt(0).toUpperCase() + i.name.slice(1).toLowerCase(),
-        address: i.address.charAt(0).toUpperCase() + i.address.slice(1).toLowerCase(),
-        city: i.city.charAt(0).toUpperCase() + i.city.slice(1).toLowerCase(),
+        name: capitalizeIt(i.name),
+        address: capitalizeIt(i.address),
+        city: capitalizeIt(i.city),
         image: '/images/pha-logo.svg'
       });
     });
+    console.log('stores', stores);
     setData(result);
   }, [stores]);
 
@@ -28,7 +30,7 @@ function ShowStoreComponent({stores}: StoreInterface[] | any) {
   };
 
   const renderStores = (
-    <div className='card-grid-view'>
+    <div className='card-grid-view' data-cy='show-store'>
       {data.map((e: any) => (
         <div key={e.key} className='card-body' onClick={() => showRedirect(e.code)}>
           <UiCardComponent content={e} />
