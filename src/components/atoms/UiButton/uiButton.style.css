@@ -19,8 +19,12 @@
 
 .button-text {
   color: #2ba3b2;
+  font-weight: 700;
+  font-size: 1.2em;
 }
 
 .button-text-primary {
   color: white;
+  font-weight: 700;
+  font-size: 1.2em;
 }

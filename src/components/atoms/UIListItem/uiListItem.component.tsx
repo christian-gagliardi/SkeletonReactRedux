@@ -1,15 +1,16 @@
 import './uiListItem.style.css';
 
-function UiListItmeComponent(props: {content: {title: string; subtitle: string}}) {
-  let data: {title: string; subtitle: string} = props.content;
+function UiListItemComponent(props: {id: string; onClick: any; title: string; subtitle: string}) {
   const uiListItem = (
-    <div className='list-item-wrapper'>
-      <h3 data-cy='list-item-title'>{data.title}</h3>
-      <div data-cy='list-item-subtitle'>{data.subtitle}</div>
-    </div>
+    <li className='list-item-wrapper' onClick={props.onClick}>
+      <div data-cy={`list-item-title-${props.id}`} className='list-item-title'>
+        {props.title}
+      </div>
+      <div data-cy={`list-item-subtitle-${props.id}`}>{props.subtitle}</div>
+    </li>
   );
 
   return uiListItem;
 }
 
-export default UiListItmeComponent;
+export default UiListItemComponent;

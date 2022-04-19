@@ -19,14 +19,21 @@ import closeButton from '../../utils/reactToastify/closeButton';
 import StoreInterface from '../../shared/interfaces/shop/shop.interface';
 import {RootState} from '../../shared/store/reducers';
 import {ShopActions} from '../../shared/store/actions/';
+import UiListItemComponent from '../../components/atoms/UIListItem/uiListItem.component';
+
+import {capitalizeIt} from '../../utils/functions';
 
 function HomeComponent() {
   const [loadMoreParams, setLoadMoreParams] = useState(0);
   const [stores, setStores] = useState<StoreInterface[]>();
   const [hideLoadMore, setHideLoadMore] = useState(false);
+  const [isSelectingShop, setisSelectingShop] = useState(false);
 
   const dispatch = useDispatch();
   const store = useSelector((state: RootState) => state.mainStore.shop);
+  let shops = useSelector((state: RootState) => state.mainStore.shops);
+
+  console.log('shops', shops);
 
   useEffect(() => {
     console.log('USE-EFFECT');
@@ -38,8 +45,6 @@ function HomeComponent() {
       console.log('end dispatch');
     }
   }, [store]);
-
-  console.log(stores);
 
   const getStoreFromService = async () => {
     return new Promise(async (resolve, reject) => {
@@ -73,7 +78,17 @@ function HomeComponent() {
   const loadMore = async () => setLoadMoreParams((loadMoreParams) => (loadMoreParams += 20));
 
   const getAllShops = () => {
-    console.log('getStores');
+    console.log('dispatch getAllShops------------------ start');
+    dispatch(ShopActions.getAllShopsAction(0, 10));
+    console.log('dispatch getAllShops------------------ end');
+    setisSelectingShop(true);
+  };
+
+  const setSelectedShop = (id: string) => {
+    setisSelectingShop(false);
+    console.log(`dispatch getShop id:${id} ------------------start`);
+    dispatch(ShopActions.getShopAction(id));
+    console.log('dispatch getShop------------------ end');
   };
 
   return (
@@ -91,9 +106,31 @@ function HomeComponent() {
             </h3>
           )}
           <div className='containerCenter'>
-            <UiButtonComponent
-              content={{text: 'Tutte le farmacie', isPrimary: true, onClick: getAllShops}}
-            />
+            {!isSelectingShop ? (
+              <UiButtonComponent
+                id='getAllShops'
+                text='Scegli altra farmacia'
+                isPrimary={true}
+                onClick={getAllShops}
+              />
+            ) : null}
+          </div>
+          <div className='containerCenter'>
+            {isSelectingShop && shops?.length ? (
+              <ul data-cy='shops-list'>
+                {shops
+                  ?.filter((s) => s.code !== store?.code)
+                  .map((shop) => (
+                    <UiListItemComponent
+                      key={shop.code.toString()}
+                      id={shop.code.toString()}
+                      onClick={() => setSelectedShop(shop._id ? shop._id.toString() : '')}
+                      title={capitalizeIt(shop.name.toString())}
+                      subtitle={capitalizeIt(`${shop.address} - ${shop.city}`)}
+                    />
+                  ))}
+              </ul>
+            ) : null}
           </div>
         </div>
       ) : null}

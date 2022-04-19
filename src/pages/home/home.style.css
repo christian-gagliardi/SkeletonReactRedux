@@ -3,10 +3,10 @@
 }
 
 .containerCenter {
-  width: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
+  justify-items: center;
+  padding: 0;
 }
 
 .loadMore {
@@ -14,4 +14,8 @@
   display: block;
   width: 170px;
   cursor: pointer;
+}
+
+ul {
+  padding-inline-start: 0;
 }

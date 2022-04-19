@@ -1,3 +1,19 @@
 .list-item-wrapper {
+  font-family: 'Georgia';
   padding: 2em;
+  list-style-type: none;
+  box-shadow: 5px 5px 10px 3px rgba(86, 107, 111, 0.1);
+  border-radius: 10px;
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+
+.list-item-wrapper:hover {
+  background-color: rgba(137, 202, 216, 0.2);
+}
+
+.list-item-title {
+  font-size: 1.2em;
+  font-weight: 700;
+  padding-bottom: 0.5em;
 }

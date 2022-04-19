@@ -1,16 +1,15 @@
 import './uiButton.style.css';
 
-function UiButtonComponent(props: {content: {text: string; isPrimary: boolean; onClick: any}}) {
-  let data: {text: string; isPrimary: boolean; onClick: any} = props.content;
+function UiButtonComponent(props: {id: string; text: string; isPrimary: boolean; onClick: any}) {
   const uiButton = (
     <button
-      data-cy='button'
-      className={data.isPrimary ? 'button button-primary' : 'button'}
-      onClick={data.onClick}>
+      data-cy={`button-${props.id}`}
+      className={props.isPrimary ? 'button button-primary' : 'button'}
+      onClick={props.onClick}>
       <span
         data-cy='button-text'
-        className={data.isPrimary ? 'button-text-primary' : 'button-text'}>
-        {data.text}
+        className={props.isPrimary ? 'button-text-primary' : 'button-text'}>
+        {props.text}
       </span>
     </button>
   );
