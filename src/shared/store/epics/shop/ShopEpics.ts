@@ -1,53 +1,53 @@
-import {combineEpics, Epic} from 'redux-observable';
-import {switchMap, map, startWith, catchError, filter, mergeMap, tap} from 'rxjs/operators';
-import axios from 'axios';
+import {combineEpics, ofType} from 'redux-observable';
+import {switchMap, map, catchError, startWith} from 'rxjs/operators';
 import Consts from '../../constants';
 import {ShopActions} from '../../actions';
 
 import {from, of} from 'rxjs';
-import {isOfType} from 'typesafe-actions';
-import StoreInterface from '../../../interfaces/shop/shop.interface';
+import {EpicDependencies} from '../types';
 
-const getStoreEpic = (action$: any, state$: any) => {
-  console.log('Epic -> getStoreEpic');
-  return action$.pipe(
-    filter(isOfType(Consts.ShopConsts.SHOP_GET)),
+export const getShopEpic = (action$: any, state$: any, deps: EpicDependencies) =>
+  action$.pipe(
+    ofType(Consts.ShopConsts.SHOP_GET),
     switchMap((action: {payload: {id: string}}) => {
-      return from(axios.get('http://localhost:3000/api/store/details/' + action.payload.id)).pipe(
-        map((response: any) => ShopActions.setShopAction(response.data)),
-        startWith(ShopActions.shopLoadingAction()),
-        catchError(() => of(ShopActions.shopFailed()))
+      console.log('# EPIC -> getShopEpic 🌀');
+      return from(
+        deps.get(`${process.env.REACT_APP_BASE_URL}/api/store/details/${action.payload.id}`)
+      ).pipe(
+        map((response: any) => {
+          console.log('# EPIC -> getShopEpic ✅');
+          return ShopActions.shopLoaded(response.data);
+        }),
+        catchError((err) => {
+          console.log('# EPIC -> getShopEpic ❌');
+          return of(ShopActions.shopFailed(err));
+        }),
+        startWith(of(ShopActions.shopLoading()))
       );
     })
   );
-};
 
-const getAllStoresEpic = (action$: any, state$: any) => {
-  console.log('Epic -> getAllStoresEpic');
-  return action$.pipe(
-    filter(isOfType(Consts.ShopConsts.SHOP_GET_ALL)),
+export const getShopListEpic = (action$: any, state$: any, deps: EpicDependencies) =>
+  action$.pipe(
+    ofType(Consts.ShopConsts.SHOP_LIST_GET),
     switchMap((action: {payload: {offset: number; limit: number}}) => {
+      console.log('# EPIC -> getShopListEpic 🌀');
       return from(
-        axios.get(
-          `http://localhost:3000/api/store/list/${action.payload.offset}/${action.payload.limit}`
+        deps.get(
+          `${process.env.REACT_APP_BASE_URL}/api/store/list/${action.payload.offset}/${action.payload.limit}`
         )
       ).pipe(
-        map((response: any) => ShopActions.setAllShopsAction(response.data)),
-        startWith(ShopActions.shopLoadingAction()),
-        catchError(() => of(ShopActions.shopFailed()))
+        map((response: any) => {
+          console.log('# EPIC -> getShopListEpic ✅ ');
+          return ShopActions.shopListLoaded(response.data);
+        }),
+        catchError((err) => {
+          console.log('# EPIC -> getShopListEpic ❌');
+          return of(ShopActions.shopListFailed(err));
+        }),
+        startWith(of(ShopActions.shopListLoading()))
       );
     })
   );
-};
 
-const setStoreEpic = (action$: any, state$: any) => {
-  console.log('Epic -> setStoreEpic');
-
-  return action$.pipe(
-    filter(isOfType(Consts.ShopConsts.SHOP_SET)),
-    map((action: {payload: {store: StoreInterface}}) => (state$.store = action.payload.store)),
-    map(() => ShopActions.shopLoadedAction())
-  );
-};
-
-export default combineEpics(getStoreEpic, setStoreEpic, getAllStoresEpic);
+export default combineEpics(getShopEpic, getShopListEpic);

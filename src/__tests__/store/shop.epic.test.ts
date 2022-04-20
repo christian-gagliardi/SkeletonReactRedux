@@ -1,12 +1,10 @@
-import {ApiStatusModel} from '../../shared/interfaces/api';
 import {ShopActions} from '../../shared/store/actions';
-import {ShopConsts} from '../../shared/store/constants/shop';
+import {EpicDependencies} from '../../shared/store/epics/types';
+import {getShopEpic} from '../../shared/store/epics/shop/ShopEpics';
 import {initialStoreState} from '../../shared/store/initialStoreState';
-import shopReducer from '../../shared/store/reducers/shop';
-import {TestScheduler} from 'rxjs/testing';
+import {of} from 'rxjs';
 import axios from 'axios';
-import {StateObservable} from 'redux-observable';
-import ShopEpics from '../../shared/store/epics/shop/ShopEpics';
+import {ShopConsts} from '../../shared/store/constants/shop';
 
 // reference: https://gist.github.com/TracyNgot/805b3a902bd62dcc5bfa507a824a0f01
 
@@ -37,13 +35,61 @@ const mockShop = {
 };
 
 jest.mock('axios');
+const mockedAxios = axios as jest.Mocked<typeof axios>;
+
+const mockDeps: EpicDependencies = {
+  get: mockedAxios.get
+};
 
 describe('Shop epics', () => {
-  describe('getStoreEpic', () => {
-    it('should send correct actions when success', (done) => {
-      const expected = ShopActions.shopLoadedAction();
+  describe('getShopEpic', () => {
+    it('should correctly call api service to get data', (done) => {
+      const tId = 'abc';
 
-      //const action$ = ActionsObservable.of(ShopActions.getShopAction('foo'));
+      const action$ = of(ShopActions.getShop(tId));
+      const state$ = initialStoreState;
+      const epic$ = getShopEpic(action$, state$, mockDeps);
+      const expected$ = ShopActions.shopLoaded(mockShop);
+
+      mockedAxios.get.mockResolvedValueOnce({data: mockShop});
+
+      epic$.subscribe(() => {
+        expect(axios.get).toBeCalledWith(
+          `${process.env.REACT_APP_BASE_URL}/api/store/details/${tId}`
+        );
+        done();
+      });
+    });
+
+    it('should dispatch the correct response on success', (done) => {
+      const tId = 'abc';
+
+      const action$ = of(ShopActions.getShop(tId));
+      const state$ = initialStoreState;
+      const epic$ = getShopEpic(action$, state$, mockDeps);
+
+      mockedAxios.get.mockResolvedValueOnce({data: mockShop});
+
+      epic$.subscribe((action: any) => {
+        expect(action.type).toBe(ShopConsts.SHOP_LOADED);
+        expect(action.payload).toStrictEqual({shop: mockShop});
+        done();
+      });
+    });
+
+    it('should dispatch the correct response on failure', (done) => {
+      const tId = 'abc';
+
+      const action$ = of(ShopActions.getShop(tId));
+      const state$ = initialStoreState;
+      const epic$ = getShopEpic(action$, state$, mockDeps);
+
+      mockedAxios.get.mockRejectedValueOnce('abc');
+
+      epic$.subscribe((action: any) => {
+        expect(action.type).toBe(ShopConsts.SHOP_FAILED);
+        done();
+      });
     });
   });
 });

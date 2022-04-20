@@ -1,3 +1,4 @@
+import {ApiStatusModel} from '../../shared/interfaces/api';
 import {ShopActions} from '../../shared/store/actions';
 import {ShopConsts} from '../../shared/store/constants/shop';
 
@@ -28,64 +29,67 @@ const mockShop = {
 };
 
 describe('Shop actions', () => {
-  it('getShopAction', () => {
-    expect(ShopActions.getShopAction('foo')).toEqual({
+  test('getShop', () => {
+    expect(ShopActions.getShop('foo')).toEqual({
       type: ShopConsts.SHOP_GET,
       payload: {
         id: 'foo'
       }
     });
   });
-  it('getAllShopsAction', () => {
-    let tOffset = Math.random();
-    let tLimit = Math.random();
-
-    expect(ShopActions.getAllShopsAction(tOffset, tLimit)).toEqual({
-      type: ShopConsts.SHOP_GET_ALL,
-      payload: {
-        offset: tOffset,
-        limit: tLimit
-      }
-    });
-  });
-  it('setShopAction', () => {
-    expect(ShopActions.setShopAction(mockShop)).toEqual({
+  test('setShop', () => {
+    expect(ShopActions.setShop(mockShop)).toEqual({
       type: ShopConsts.SHOP_SET,
       payload: {
         shop: mockShop
       }
     });
   });
-  it('setAllShopsAction', () => {
-    expect(ShopActions.setAllShopsAction([mockShop])).toEqual({
-      type: ShopConsts.SHOP_SET_ALL,
+  test('shopLoaded', () => {
+    expect(ShopActions.shopLoaded(mockShop)).toEqual({
+      type: ShopConsts.SHOP_LOADED,
+      payload: {
+        shop: mockShop
+      }
+    });
+  });
+  test('shopFailed', () => {
+    expect(ShopActions.shopFailed('test')).toEqual({
+      type: ShopConsts.SHOP_FAILED
+    });
+  });
+  test('getShopList', () => {
+    let tOffset = Math.random();
+    let tLimit = Math.random();
+
+    expect(ShopActions.getShopList(tOffset, tLimit)).toEqual({
+      type: ShopConsts.SHOP_LIST_GET,
+      payload: {
+        offset: tOffset,
+        limit: tLimit
+      }
+    });
+  });
+
+  test('setShopList', () => {
+    expect(ShopActions.setShopList([mockShop])).toEqual({
+      type: ShopConsts.SHOP_LIST_SET,
       payload: {
         shops: [mockShop]
       }
     });
   });
-  it('shopLoadingAction', () => {
-    expect(ShopActions.shopLoadingAction()).toEqual({
-      type: ShopConsts.SHOP_LOADING,
-      payload: undefined
+  test('shopListLoaded', () => {
+    expect(ShopActions.shopListLoaded([mockShop])).toEqual({
+      type: ShopConsts.SHOP_LIST_LOADED,
+      payload: {
+        shops: [mockShop]
+      }
     });
   });
-  it('shopLoadedAction', () => {
-    expect(ShopActions.shopLoadedAction()).toEqual({
-      type: ShopConsts.SHOP_LOADED,
-      payload: undefined
-    });
-  });
-  it('shopFailed', () => {
-    expect(ShopActions.shopFailed()).toEqual({
-      type: ShopConsts.SHOP_ERROR,
-      payload: undefined
-    });
-  });
-  it('shopSuccessAction', () => {
-    expect(ShopActions.shopSuccessAction()).toEqual({
-      type: ShopConsts.SHOP_SUCCESS,
-      payload: undefined
+  test('shopListFailed', () => {
+    expect(ShopActions.shopListFailed()).toEqual({
+      type: ShopConsts.SHOP_LIST_FAILED
     });
   });
 });

@@ -1,8 +1,8 @@
 import {ShopConsts} from '../../constants/shop';
 import ShopInterface from '../../../interfaces/shop/shop.interface';
 
-export function getShopAction(id: String) {
-  console.log('Action -> SHOP_GET');
+export function getShop(id: String) {
+  console.log('# ACTION -> getShop');
 
   return {
     type: ShopConsts.SHOP_GET,
@@ -12,20 +12,8 @@ export function getShopAction(id: String) {
   };
 }
 
-export function getAllShopsAction(offset: number, limit: number) {
-  console.log('Action -> SHOP_GET_ALL');
-
-  return {
-    type: ShopConsts.SHOP_GET_ALL,
-    payload: {
-      offset,
-      limit
-    }
-  };
-}
-
-export function setShopAction(shop: ShopInterface) {
-  console.log('Action -> SHOP_SET');
+export function setShop(shop: ShopInterface) {
+  console.log('# ACTION -> setShop');
 
   return {
     type: ShopConsts.SHOP_SET,
@@ -35,54 +23,79 @@ export function setShopAction(shop: ShopInterface) {
   };
 }
 
-export function setAllShopsAction(shops: ShopInterface[]) {
-  console.log('Action -> SHOP_SET_ALL');
-
-  return {
-    type: ShopConsts.SHOP_SET_ALL,
-    payload: {
-      shops
-    }
-  };
-}
-
-export function shopFailed() {
-  console.log('Action -> SHOP_ERROR');
-
-  return {
-    type: ShopConsts.SHOP_ERROR
-  };
-}
-
-export function shopLoadingAction() {
-  console.log('Action -> SHOP_LOADING');
-
-  return {
-    type: ShopConsts.SHOP_LOADING
-  };
-}
-
-export function shopLoadedAction() {
-  console.log('Action -> SHOP_LOADED');
+export function shopLoading() {
+  console.log('# ACTION -> shopLoading');
 
   return {
     type: ShopConsts.SHOP_LOADED
   };
 }
 
-export function shopSuccessAction() {
-  console.log('Action -> SHOP_SUCCESS');
+export function shopLoaded(shop: ShopInterface) {
+  console.log('# ACTION -> shopLoaded');
 
   return {
-    type: ShopConsts.SHOP_SUCCESS
+    type: ShopConsts.SHOP_LOADED,
+    payload: {
+      shop
+    }
   };
 }
 
-// export const StoreActionType = {
-//     SHOP_UPDATE  : { type: ShopConsts.SHOP_UPDATE },
-//     SHOP_LOADING : { type: ShopConsts.SHOP_LOADING },
-//     SHOP_ERROR   : { type: ShopConsts.SHOP_ERROR },
-//     SHOP_GET     : { type: ShopConsts.SHOP_GET },
-//     SHOP_SUCCESS : { type: ShopConsts.SHOP_SUCCESS },
-//     SHOP_SET     : { type: ShopConsts.SHOP_SET },
-// }
+export function shopFailed(reason?: string) {
+  console.log('# ACTION -> shopFailed');
+
+  return {
+    type: ShopConsts.SHOP_FAILED
+  };
+}
+
+export function getShopList(offset: number, limit: number) {
+  console.log('# ACTION -> getShopList');
+
+  return {
+    type: ShopConsts.SHOP_LIST_GET,
+    payload: {
+      offset,
+      limit
+    }
+  };
+}
+
+export function setShopList(shops: ShopInterface[]) {
+  console.log('# ACTION -> setShopList');
+
+  return {
+    type: ShopConsts.SHOP_LIST_SET,
+    payload: {
+      shops
+    }
+  };
+}
+
+export function shopListLoading() {
+  console.log('# ACTION -> shopListLoading');
+
+  return {
+    type: ShopConsts.SHOP_LOADED
+  };
+}
+
+export function shopListLoaded(shops: ShopInterface[]) {
+  console.log('# ACTION -> shopListLoaded');
+
+  return {
+    type: ShopConsts.SHOP_LIST_LOADED,
+    payload: {
+      shops
+    }
+  };
+}
+
+export function shopListFailed(reason?: string) {
+  console.log('# ACTION -> shopListFailed');
+
+  return {
+    type: ShopConsts.SHOP_LIST_FAILED
+  };
+}

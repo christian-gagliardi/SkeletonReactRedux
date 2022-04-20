@@ -3,10 +3,11 @@ import {useEffect, useState} from 'react';
 import StoreInterface from '../../../shared/interfaces/shop/shop.interface';
 import UiCardComponent from '../../atoms/UiCard/uiCard.component';
 import './showStore.style.css';
+import ShopInterface from '../../../shared/interfaces/shop/shop.interface';
 
 function ShowStoreComponent({stores}: StoreInterface[] | any) {
   const [data, setData] = useState([]);
-  const [redirect, setRedirect] = useState(0);
+  const [redirect, setRedirect] = useState('');
   useEffect(() => {
     if (!stores) return;
     let result: any = [];
@@ -23,14 +24,14 @@ function ShowStoreComponent({stores}: StoreInterface[] | any) {
     setData(result);
   }, [stores]);
 
-  const showRedirect = (code: number) => {
+  const showRedirect = (code: string) => {
     return setRedirect(code);
   };
 
   const renderStores = (
     <div className='card-grid-view'>
       {data.map((e: any) => (
-        <div key={e.key} className='card-body' onClick={() => showRedirect(e.code)}>
+        <div key={e.key} className='card-body' onClick={() => showRedirect(e.key)}>
           <UiCardComponent content={e} />
         </div>
       ))}
@@ -38,11 +39,11 @@ function ShowStoreComponent({stores}: StoreInterface[] | any) {
   );
 
   const renderRedirect = () => {
-    const url = `/generate/qr/${redirect}`;
+    const url = `/details/${redirect}`;
     return <Navigate to={url} />;
   };
 
-  return redirect > 0 ? renderRedirect() : renderStores;
+  return redirect != '' ? renderRedirect() : renderStores;
 }
 
 export default ShowStoreComponent;

@@ -34,6 +34,23 @@ describe('Shop reducers', () => {
     expect(shopReducer(undefined, {type: '', payload: null})).toEqual(initialStoreState);
   });
 
+  it('should handle shop details being requested', () => {
+    const previousState = initialStoreState;
+    expect(
+      shopReducer(undefined, {type: ShopConsts.SHOP_GET, payload: {id: mockShop._id}})
+    ).toEqual({
+      ...previousState
+    });
+  });
+
+  it('should handle shop details loading state', () => {
+    const previousState = initialStoreState;
+    expect(shopReducer(undefined, {type: ShopConsts.SHOP_LOADING, payload: undefined})).toEqual({
+      ...previousState,
+      loadingStatus: ApiStatusModel.LOADING
+    });
+  });
+
   it('should handle shop details being added', () => {
     const previousState = initialStoreState;
     expect(shopReducer(undefined, {type: ShopConsts.SHOP_SET, payload: {shop: mockShop}})).toEqual({
@@ -42,45 +59,73 @@ describe('Shop reducers', () => {
     });
   });
 
+  it('should handle shop details being loaded', () => {
+    const previousState = initialStoreState;
+    expect(
+      shopReducer(undefined, {type: ShopConsts.SHOP_LOADED, payload: {shop: mockShop}})
+    ).toEqual({
+      ...previousState,
+      loadingStatus: ApiStatusModel.LOADED,
+      shop: mockShop
+    });
+  });
+
+  it('should handle shop details fail', () => {
+    const previousState = initialStoreState;
+    expect(shopReducer(undefined, {type: ShopConsts.SHOP_FAILED, payload: undefined})).toEqual({
+      ...previousState,
+      loadingStatus: ApiStatusModel.FAILED
+    });
+  });
+
+  it('should handle shop list being requested', () => {
+    const previousState = initialStoreState;
+    expect(
+      shopReducer(undefined, {type: ShopConsts.SHOP_LIST_GET, payload: {offset: 0, limit: 10}})
+    ).toEqual({
+      ...previousState,
+      loadingStatus: ApiStatusModel.LOADING
+    });
+  });
+
+  it('should handle shop list loading state', () => {
+    const previousState = initialStoreState;
+    expect(
+      shopReducer(undefined, {type: ShopConsts.SHOP_LIST_LOADING, payload: undefined})
+    ).toEqual({
+      ...previousState,
+      loadingStatus: ApiStatusModel.LOADING
+    });
+  });
+
   it('should handle shop list being added', () => {
     const previousState = initialStoreState;
     expect(
-      shopReducer(undefined, {type: ShopConsts.SHOP_SET_ALL, payload: {shops: [mockShop]}})
+      shopReducer(undefined, {type: ShopConsts.SHOP_LIST_SET, payload: {shops: [mockShop]}})
     ).toEqual({
       ...previousState,
       shops: [mockShop]
     });
   });
 
-  it('should handle loading status', () => {
+  it('should handle shop list being loaded', () => {
     const previousState = initialStoreState;
-    expect(shopReducer(undefined, {type: ShopConsts.SHOP_LOADING, payload: undefined})).toEqual({
+    expect(
+      shopReducer(undefined, {type: ShopConsts.SHOP_LIST_LOADED, payload: {shops: [mockShop]}})
+    ).toEqual({
       ...previousState,
-      loadingStatus: ApiStatusModel.LOADING
+      loadingStatus: ApiStatusModel.LOADED,
+      shops: [mockShop]
     });
   });
 
-  it('should handle loaded status', () => {
+  it('should handle shop list fail', () => {
     const previousState = initialStoreState;
-    expect(shopReducer(undefined, {type: ShopConsts.SHOP_LOADED, payload: undefined})).toEqual({
-      ...previousState,
-      loadingStatus: ApiStatusModel.LOADED
-    });
-  });
-
-  it('should handle failure status', () => {
-    const previousState = initialStoreState;
-    expect(shopReducer(undefined, {type: ShopConsts.SHOP_ERROR, payload: undefined})).toEqual({
-      ...previousState,
-      loadingStatus: ApiStatusModel.FAILED
-    });
-  });
-
-  it('should handle success status', () => {
-    const previousState = initialStoreState;
-    expect(shopReducer(undefined, {type: ShopConsts.SHOP_SUCCESS, payload: undefined})).toEqual({
-      ...previousState,
-      loadingStatus: ApiStatusModel.SUCCESS
-    });
+    expect(shopReducer(undefined, {type: ShopConsts.SHOP_LIST_FAILED, payload: undefined})).toEqual(
+      {
+        ...previousState,
+        loadingStatus: ApiStatusModel.FAILED
+      }
+    );
   });
 });

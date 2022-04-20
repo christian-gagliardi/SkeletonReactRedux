@@ -33,7 +33,7 @@ function HomeComponent() {
 
     if (!store) {
       console.log('dispatch---------------------------------- start');
-      dispatch(ShopActions.getShopAction('5f5a4fa151853f001886a5c5'));
+      dispatch(ShopActions.getShop('5f5a4fa151853f001886a5c5'));
       console.log('end dispatch');
     }
   }, [store]);

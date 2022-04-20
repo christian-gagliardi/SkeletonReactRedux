@@ -1,25 +1,25 @@
 export default interface ShopInterface {
-  _id?: String;
-  __v?: Number;
+  _id?: string;
+  __v?: number;
   location: {
-    type: String;
-    coordinates: Number[];
+    type: string;
+    coordinates: number[];
   };
-  description: String;
-  phone: String;
-  email: String;
-  note: String;
+  description: string;
+  phone: string;
+  email: string;
+  note: string;
   active: Boolean;
-  code: String;
-  name: String;
-  address: String;
-  city: String;
-  cap: String;
-  whatsapp: String;
-  doctor: String;
-  display_name: String;
-  region: String;
-  whatsapp_prefix: String;
+  code: string;
+  name: string;
+  address: string;
+  city: string;
+  cap: string;
+  whatsapp: string;
+  doctor: string;
+  display_name: string;
+  region: string;
+  whatsapp_prefix: string;
   isVirtual: Boolean;
   pro: Boolean;
 }
