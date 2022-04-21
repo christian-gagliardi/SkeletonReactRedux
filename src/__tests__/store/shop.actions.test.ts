@@ -1,4 +1,3 @@
-import {ApiStatusModel} from '../../shared/interfaces/api';
 import {ShopActions} from '../../shared/store/actions';
 import {ShopConsts} from '../../shared/store/constants/shop';
 
