@@ -45,11 +45,8 @@ describe('Shop actions', () => {
     });
   });
   test('shopLoaded', () => {
-    expect(ShopActions.shopLoaded(mockShop)).toEqual({
-      type: ShopConsts.SHOP_LOADED,
-      payload: {
-        shop: mockShop
-      }
+    expect(ShopActions.shopLoaded()).toEqual({
+      type: ShopConsts.SHOP_LOADED
     });
   });
   test('shopFailed', () => {
@@ -79,11 +76,8 @@ describe('Shop actions', () => {
     });
   });
   test('shopListLoaded', () => {
-    expect(ShopActions.shopListLoaded([mockShop])).toEqual({
-      type: ShopConsts.SHOP_LIST_LOADED,
-      payload: {
-        shops: [mockShop]
-      }
+    expect(ShopActions.shopListLoaded()).toEqual({
+      type: ShopConsts.SHOP_LIST_LOADED
     });
   });
   test('shopListFailed', () => {

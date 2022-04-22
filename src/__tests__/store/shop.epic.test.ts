@@ -36,7 +36,8 @@ jest.mock('axios');
 const mockedAxios = axios as jest.Mocked<typeof axios>;
 
 const mockDeps: EpicDependencies = {
-  get: mockedAxios.get
+  get: mockedAxios.get,
+  loadingDelayMs: 100
 };
 
 describe('Shop epics', () => {
@@ -68,7 +69,7 @@ describe('Shop epics', () => {
       mockedAxios.get.mockResolvedValueOnce({data: mockShop});
 
       epic$.subscribe((action: any) => {
-        expect(action.type).toBe(ShopConsts.SHOP_LOADED);
+        expect(action.type).toBe(ShopConsts.SHOP_SET);
         expect(action.payload).toStrictEqual({shop: mockShop});
         done();
       });
@@ -120,7 +121,7 @@ describe('Shop epics', () => {
       mockedAxios.get.mockResolvedValueOnce({data: [mockShop]});
 
       epic$.subscribe((action: any) => {
-        expect(action.type).toBe(ShopConsts.SHOP_LIST_LOADED);
+        expect(action.type).toBe(ShopConsts.SHOP_LIST_SET);
         expect(action.payload).toStrictEqual({shops: [mockShop]});
         done();
       });

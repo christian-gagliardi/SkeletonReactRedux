@@ -25,7 +25,6 @@ export default function shopReducer(
 
       case ShopConsts.SHOP_LOADED:
         console.log('# REDUCERS -> SHOP_LOADED');
-        draft.shop = action.payload.shop;
         draft.loadingStatus = ApiStatusModel.LOADED;
         break;
 
@@ -51,7 +50,6 @@ export default function shopReducer(
 
       case ShopConsts.SHOP_LIST_LOADED:
         console.log('# REDUCERS -> SHOP_LIST_LOADED');
-        draft.shops = action.payload.shops;
         draft.loadingStatus = ApiStatusModel.LOADED;
         break;
 

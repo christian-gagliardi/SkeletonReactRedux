@@ -1,9 +1,7 @@
 import {applyMiddleware, createStore} from 'redux';
 import {composeWithDevTools} from 'redux-devtools-extension';
-import StoreStateInterface from '../interfaces/_state/storeState.interface';
-import {ApiStatusModel} from '../interfaces/api';
 import epicMiddleware, {rootEpic} from './epics';
-
+import thunk from 'redux-thunk';
 import {rootReducer, initialState} from './reducers';
 
 const composeEnhancer = composeWithDevTools({
@@ -13,7 +11,7 @@ const composeEnhancer = composeWithDevTools({
 const store = createStore(
   rootReducer,
   initialState,
-  composeEnhancer(applyMiddleware(epicMiddleware))
+  composeEnhancer(applyMiddleware(thunk, epicMiddleware))
 );
 
 epicMiddleware.run(rootEpic);

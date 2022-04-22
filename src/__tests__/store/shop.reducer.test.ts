@@ -61,12 +61,9 @@ describe('Shop reducers', () => {
 
   it('should handle shop details being loaded', () => {
     const previousState = initialStoreState;
-    expect(
-      shopReducer(undefined, {type: ShopConsts.SHOP_LOADED, payload: {shop: mockShop}})
-    ).toEqual({
+    expect(shopReducer(undefined, {type: ShopConsts.SHOP_LOADED, payload: undefined})).toEqual({
       ...previousState,
-      loadingStatus: ApiStatusModel.LOADED,
-      shop: mockShop
+      loadingStatus: ApiStatusModel.LOADED
     });
   });
 
@@ -110,13 +107,12 @@ describe('Shop reducers', () => {
 
   it('should handle shop list being loaded', () => {
     const previousState = initialStoreState;
-    expect(
-      shopReducer(undefined, {type: ShopConsts.SHOP_LIST_LOADED, payload: {shops: [mockShop]}})
-    ).toEqual({
-      ...previousState,
-      loadingStatus: ApiStatusModel.LOADED,
-      shops: [mockShop]
-    });
+    expect(shopReducer(undefined, {type: ShopConsts.SHOP_LIST_LOADED, payload: undefined})).toEqual(
+      {
+        ...previousState,
+        loadingStatus: ApiStatusModel.LOADED
+      }
+    );
   });
 
   it('should handle shop list fail', () => {
