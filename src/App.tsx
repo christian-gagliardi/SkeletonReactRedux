@@ -5,20 +5,22 @@ import ShopDetails from './pages/details';
 import {GlobalStyle} from './theme';
 import PreviewPage from './pages/preview';
 
-const app = (
-  <BrowserRouter>
-    <GlobalStyle />
-    <Routes>
-      <Route path='/' element={<HomeComponent />} />
-      <Route path='/list' element={<ShopList />} />
-      <Route path='/details/:shopId' element={<ShopDetails />} />
-      <Route path='/preview' element={<PreviewPage />} />
-    </Routes>
-  </BrowserRouter>
-);
-
-function AppRouter() {
-  return <div id='RootContainer'> {app} </div>;
+function App() {
+  return (
+    <BrowserRouter>
+      <GlobalStyle />
+      <Routes>
+        <Route path='/' element={<HomeComponent />} />
+        <Route path='/list' element={<ShopList />} />
+        <Route path='/details/:shopId' element={<ShopDetails />} />
+        <Route path='/preview' element={<PreviewPage />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
-export default AppRouter;
+function AppRouter() {
+  return <div id='RootContainer'> {App} </div>;
+}
+
+export default App;

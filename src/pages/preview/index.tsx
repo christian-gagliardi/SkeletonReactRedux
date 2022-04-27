@@ -1,148 +1,37 @@
-import {Button, ButtonScale, ButtonVariant} from '../../components/atoms/Button';
-import {FaBeer} from 'react-icons/fa';
+import {MultilevelSideMenu, MenuItem} from '../../components/organisms/MultilevelSideMenu';
 
 const PreviewPage: React.FC = () => {
+  const menuItemsA: MenuItem[] = [
+    {label: 'AA', child: <div></div>},
+    {label: 'AB', child: <div></div>},
+    {label: 'AC', child: <div></div>},
+    {label: 'AD', child: <div></div>},
+    {label: 'AE', child: <div></div>},
+    {label: 'AF', child: <div></div>}
+  ];
+
+  const menuItemsB: MenuItem[] = [
+    {label: 'BA', child: <div></div>},
+    {label: 'BB', child: <div></div>},
+    {label: 'BC', child: <div></div>},
+    {label: 'BD', child: <div></div>},
+    {label: 'BE', child: <div></div>},
+    {label: 'BF', child: <div></div>}
+  ];
+
+  const menuItems: MenuItem[] = [
+    {label: 'A', child: menuItemsA},
+    {label: 'B', child: menuItemsB},
+    {label: 'C', child: <div></div>},
+    {label: 'D', child: <div></div>},
+    {label: 'E', child: <div></div>},
+    {label: 'F', child: <div></div>}
+  ];
+
   return (
-    <div className='flex flex-col space-y-2'>
-      <div className='inline-flex space-x-2'>
-        <Button label='Button' variant={ButtonVariant.primary} scale={ButtonScale.LG} />
-        <Button label='Button' variant={ButtonVariant.secondary} scale={ButtonScale.LG} />
-        <Button label='Button' variant={ButtonVariant.success} scale={ButtonScale.LG} />
-        <Button label='Button' variant={ButtonVariant.danger} scale={ButtonScale.LG} />
-        <Button label='Button' variant={ButtonVariant.text} scale={ButtonScale.LG} />
-      </div>
-      <div className='flex space-x-2'>
-        <Button label='Button' variant={ButtonVariant.primary} scale={ButtonScale.MD} />
-        <Button label='Button' variant={ButtonVariant.secondary} scale={ButtonScale.MD} />
-        <Button label='Button' variant={ButtonVariant.success} scale={ButtonScale.MD} />
-        <Button label='Button' variant={ButtonVariant.danger} scale={ButtonScale.MD} />
-        <Button label='Button' variant={ButtonVariant.text} scale={ButtonScale.MD} />
-      </div>
-      <div className='flex space-x-2'>
-        <Button label='Button' variant={ButtonVariant.primary} scale={ButtonScale.SM} />
-        <Button label='Button' variant={ButtonVariant.secondary} scale={ButtonScale.SM} />
-        <Button label='Button' variant={ButtonVariant.success} scale={ButtonScale.SM} />
-        <Button label='Button' variant={ButtonVariant.danger} scale={ButtonScale.SM} />
-        <Button label='Button' variant={ButtonVariant.text} scale={ButtonScale.SM} />
-      </div>
-      <div className='inline-flex space-x-2'>
-        <Button
-          icon={<FaBeer />}
-          label='Button'
-          variant={ButtonVariant.primary}
-          scale={ButtonScale.LG}
-        />
-        <Button
-          icon={<FaBeer />}
-          label='Button'
-          variant={ButtonVariant.secondary}
-          scale={ButtonScale.LG}
-        />
-        <Button
-          icon={<FaBeer />}
-          label='Button'
-          variant={ButtonVariant.success}
-          scale={ButtonScale.LG}
-        />
-        <Button
-          icon={<FaBeer />}
-          label='Button'
-          variant={ButtonVariant.danger}
-          scale={ButtonScale.LG}
-        />
-        <Button
-          icon={<FaBeer />}
-          label='Button'
-          variant={ButtonVariant.text}
-          scale={ButtonScale.LG}
-        />
-      </div>
-      <div className='flex space-x-2'>
-        <Button
-          icon={<FaBeer />}
-          label='Button'
-          variant={ButtonVariant.primary}
-          scale={ButtonScale.MD}
-        />
-        <Button
-          icon={<FaBeer />}
-          label='Button'
-          variant={ButtonVariant.secondary}
-          scale={ButtonScale.MD}
-        />
-        <Button
-          icon={<FaBeer />}
-          label='Button'
-          variant={ButtonVariant.success}
-          scale={ButtonScale.MD}
-        />
-        <Button
-          icon={<FaBeer />}
-          label='Button'
-          variant={ButtonVariant.danger}
-          scale={ButtonScale.MD}
-        />
-        <Button
-          icon={<FaBeer />}
-          label='Button'
-          variant={ButtonVariant.text}
-          scale={ButtonScale.MD}
-        />
-      </div>
-      <div className='flex space-x-2'>
-        <Button
-          icon={<FaBeer />}
-          label='Button'
-          variant={ButtonVariant.primary}
-          scale={ButtonScale.SM}
-        />
-        <Button
-          icon={<FaBeer />}
-          label='Button'
-          variant={ButtonVariant.secondary}
-          scale={ButtonScale.SM}
-        />
-        <Button
-          icon={<FaBeer />}
-          label='Button'
-          variant={ButtonVariant.success}
-          scale={ButtonScale.SM}
-        />
-        <Button
-          icon={<FaBeer />}
-          label='Button'
-          variant={ButtonVariant.danger}
-          scale={ButtonScale.SM}
-        />
-        <Button
-          icon={<FaBeer />}
-          label='Button'
-          variant={ButtonVariant.text}
-          scale={ButtonScale.SM}
-        />
-      </div>
-      <div className='inline-flex space-x-2'>
-        <Button icon={<FaBeer />} variant={ButtonVariant.primary} scale={ButtonScale.LG} />
-        <Button icon={<FaBeer />} variant={ButtonVariant.secondary} scale={ButtonScale.LG} />
-        <Button icon={<FaBeer />} variant={ButtonVariant.success} scale={ButtonScale.LG} />
-        <Button icon={<FaBeer />} variant={ButtonVariant.danger} scale={ButtonScale.LG} />
-        <Button icon={<FaBeer />} variant={ButtonVariant.text} scale={ButtonScale.LG} />
-      </div>
-      <div className='flex space-x-2'>
-        <Button icon={<FaBeer />} variant={ButtonVariant.primary} scale={ButtonScale.MD} />
-        <Button icon={<FaBeer />} variant={ButtonVariant.secondary} scale={ButtonScale.MD} />
-        <Button icon={<FaBeer />} variant={ButtonVariant.success} scale={ButtonScale.MD} />
-        <Button icon={<FaBeer />} variant={ButtonVariant.danger} scale={ButtonScale.MD} />
-        <Button icon={<FaBeer />} variant={ButtonVariant.text} scale={ButtonScale.MD} />
-      </div>
-      <div className='flex space-x-2'>
-        <Button icon={<FaBeer />} variant={ButtonVariant.primary} scale={ButtonScale.SM} />
-        <Button icon={<FaBeer />} variant={ButtonVariant.secondary} scale={ButtonScale.SM} />
-        <Button icon={<FaBeer />} variant={ButtonVariant.success} scale={ButtonScale.SM} />
-        <Button icon={<FaBeer />} variant={ButtonVariant.danger} scale={ButtonScale.SM} />
-        <Button icon={<FaBeer />} variant={ButtonVariant.text} scale={ButtonScale.SM} />
-      </div>
-    </div>
+    <>
+      <MultilevelSideMenu items={menuItems} />
+    </>
   );
 };
 

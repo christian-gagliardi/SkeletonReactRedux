@@ -31,9 +31,9 @@ const Button: React.FC<ButtonProps> = ({
     [ButtonVariant.text]: 'bg-transparent hover:bg-gray-100 disabled:bg-transparent'
   };
   const scalePadding: Record<ButtonScale, string> = {
-    [ButtonScale.LG]: 'px-4 py-2',
-    [ButtonScale.MD]: 'px-4 py-2',
-    [ButtonScale.SM]: 'px-4 py-2'
+    [ButtonScale.LG]: 'px-4 py-1',
+    [ButtonScale.MD]: 'px-4 py-1',
+    [ButtonScale.SM]: 'px-4 py-1'
   };
 
   const scaleFont: Record<ButtonScale, string> = {
@@ -53,7 +53,7 @@ const Button: React.FC<ButtonProps> = ({
   const font = `${scaleFont[scale]} ${variantFont[variant]}`;
   const spacing = 'space-x-2';
   const transition = 'duration-500 transform transition';
-  const borders = 'rounded-xl';
+  const borders = 'rounded-lg';
   const alignment = 'inline-flex items-center';
 
   return (
